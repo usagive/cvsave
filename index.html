@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CVS Pharmacy Rewards Program</title>
+  <meta name="description" content="Get your CVS Pharmacy gift card reward now.">
+
+  <style>
+    :root {
+      --page-start: #fff5f5;
+      --page-end: #f8fafc;
+      --text: #111827;
+      --muted: #64748b;
+      --card: #ffffff;
+      --red: #cc0000;
+      --red-hover: #b30000;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--page-start), var(--page-end));
+      min-height: 100vh;
+      padding-bottom: 90px; /* Space for floating ticker on mobile */
+    }
+
+    .page {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 16px 16px 36px;
+    }
+
+    /* --- Scarcity Banner Above Logo --- */
+    .scarcity-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(204, 0, 0, 0.08);
+      border: 1px solid rgba(204, 0, 0, 0.2);
+      border-radius: 30px;
+      padding: 6px 14px;
+      margin-bottom: 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--red);
+      text-align: center;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background-color: var(--red);
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(204, 0, 0, 0.7);
+      animation: pulse-ring 1.5s infinite cubic-bezier(0.66, 0, 0, 1);
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse-ring {
+      to {
+        box-shadow: 0 0 0 8px rgba(204, 0, 0, 0);
+      }
+    }
+
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .logo {
+      width: 100%;
+      max-width: 320px;
+      height: 65px;
+      object-fit: contain;
+    }
+
+    .eyebrow {
+      margin: 0 0 2px;
+      text-align: center;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      text-align: center;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 40px rgba(0,0,0,.06);
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    .steps {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      font-size: 14.5px;
+      line-height: 1.5;
+    }
+
+    .steps li:first-child { margin-top: 0; }
+
+    .step-number {
+      flex: 0 0 auto;
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 58px;
+      margin: 0 0 32px;
+      padding: 12px 24px;
+      border: 0;
+      border-radius: var(--radius);
+      background: var(--red);
+      color: #fff;
+      font: inherit;
+      font-size: 19px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .15s ease, transform .15s ease;
+    }
+
+    .cta:hover { background: var(--red-hover); }
+    .cta:active { transform: scale(.99); }
+
+    .faq-title {
+      margin: 0 0 24px;
+      text-align: center;
+      font-size: 18px;
+      font-style: italic;
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* --- Floating Social Proof Ticker --- */
+    .proof-ticker {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      max-width: 380px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      padding: 10px 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 9999;
+      transform: translateY(120px);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+    }
+
+    .proof-ticker.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .proof-avatar {
+      width: 36px;
+      height: 36px;
+      background: var(--red);
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .proof-content {
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .proof-content strong {
+      color: #0f172a;
+    }
+
+    .proof-time {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    @media (min-width: 768px) {
+      .page { padding-top: 36px; max-width: 440px; }
+      .logo { height: 80px; max-width: 360px; }
+      h1 { font-size: 26px; }
+      .card { padding: 24px; }
+      .proof-ticker {
+        left: 24px;
+        right: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    
+    <!-- Scarcity Banner Above Logo -->
+    <div class="scarcity-banner">
+      <span class="pulse-dot"></span>
+      <span>⚠️ Limited Spots Remaining: <strong id="spots-count">14</strong>/100 Gift Cards Claimed Today</span>
+    </div>
+
+    <div class="logo-wrap">
+      <img class="logo" src="./cvs-logo.png" alt="CVS Pharmacy Rewards Program">
+    </div>
+
+    <p class="eyebrow">Complete the Steps below to claim your</p>
+    <h1>$500 CVS Pharmacy Gift Card</h1>
+
+    <section class="card">
+      <h2>Steps to Qualify</h2>
+      <ol class="steps">
+        <li><span class="step-number">1.</span><span>Click on "Start Now"</span></li>
+        <li><span class="step-number">2.</span><span>Enter your email and basic information</span></li>
+        <li><span class="step-number">3.</span><span>Complete <strong>4-5</strong> sponsored deals</span></li>
+        <li><span class="step-number">4.</span><span>Claim your $500 CVS Pharmacy Gift Card</span></li>
+      </ol>
+    </section>
+
+    <!-- CTA Button -->
+    <a class="cta" id="start-btn" data-url="https://linkthem.net/?offer_id=2581&aff_id=3083&source=test">START NOW</a>
+
+    <section class="faq">
+      <h2 class="faq-title">FREQUENTLY ASKED QUESTIONS</h2>
+
+      <div class="faq-item">
+        <h3>What are Sponsor Deals?</h3>
+        <p>Sponsor deals are partner offers—such as trial subscriptions, app milestones, or service sign-ups—that fund your gift card reward. Each deal has clear instructions; once completed, it registers automatically.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Why do I need to complete all 5 deals?</h3>
+        <p>To activate your full $500 CVS Pharmacy Gift Card value and cover system processing, our sponsors require completing the full sequence of 5 recommended partner deals.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What countries is this available in?</h3>
+        <p>This offer is currently available for residents in the United States.</p>
+      </div>
+    </section>
+
+    <footer>© 2026 CVS Pharmacy. All rights reserved.</footer>
+  </main>
+
+  <!-- Social Proof Ticker HTML -->
+  <div class="proof-ticker" id="proof-ticker">
+    <div class="proof-avatar" id="proof-avatar">SM</div>
+    <div class="proof-content">
+      <div id="proof-text"><strong>Sarah M.</strong> from NY just claimed a <strong>$500 CVS Gift Card</strong></div>
+      <div class="proof-time" id="proof-time">2 mins ago • Verified Claim</div>
+    </div>
+  </div>
+
+  <script>
+    // CTA Button Click Router
+    document.getElementById('start-btn').addEventListener('click', function() {
+      const targetUrl = this.getAttribute('data-url');
+      if (targetUrl) {
+        window.location.href = targetUrl;
+      }
+    });
+
+    // Dynamic Live Spot Count Decrement
+    let currentSpots = 14;
+    const spotsEl = document.getElementById('spots-count');
+    
+    function decrementSpots() {
+      if (currentSpots > 3) {
+        currentSpots -= Math.floor(Math.random() * 2) + 1;
+        spotsEl.innerText = currentSpots;
+      }
+    }
+    setInterval(decrementSpots, 7000);
+
+    // Rotating Social Proof Data
+    const notifications = [
+      { name: "Sarah M.", location: "NY", amount: "$500", time: "2 mins ago" },
+      { name: "Michael T.", location: "FL", amount: "$500", time: "Just now" },
+      { name: "Jessica R.", location: "MA", amount: "$500", time: "4 mins ago" },
+      { name: "David K.", location: "PA", amount: "$500", time: "1 min ago" },
+      { name: "Amanda L.", location: "NC", amount: "$500", time: "3 mins ago" },
+      { name: "Chris B.", location: "OH", amount: "$500", time: "Just now" }
+    ];
+
+    let notifyIdx = 0;
+    const ticker = document.getElementById('proof-ticker');
+    const avatar = document.getElementById('proof-avatar');
+    const text = document.getElementById('proof-text');
+    const time = document.getElementById('proof-time');
+
+    function showNextNotification() {
+      const data = notifications[notifyIdx];
+      const initials = data.name.split(' ').map(n => n[0]).join('');
+
+      avatar.innerText = initials;
+      text.innerHTML = `<strong>${data.name}</strong> from ${data.location} just claimed a <strong>${data.amount} CVS Gift Card</strong>`;
+      time.innerText = `${data.time} • Verified Claim`;
+
+      ticker.classList.add('active');
+
+      setTimeout(() => {
+        ticker.classList.remove('active');
+      }, 3500);
+
+      notifyIdx = (notifyIdx + 1) % notifications.length;
+    }
+
+    // Trigger initial notification after 1.5s, then repeat every 6s
+    setTimeout(() => {
+      showNextNotification();
+      setInterval(showNextNotification, 6000);
+    }, 1500);
+  </script>
+</body>
+</html>
